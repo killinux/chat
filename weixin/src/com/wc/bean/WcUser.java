@@ -2,6 +2,7 @@ package com.wc.bean;
 // default package
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -56,7 +57,7 @@ public class WcUser  implements java.io.Serializable {
      private Integer userState;
      
      
-     private List<WcUser> friends;
+     private List<WcUser> friends = new ArrayList<WcUser>();
 
 
     // Constructors
@@ -313,7 +314,7 @@ public class WcUser  implements java.io.Serializable {
 		json.add("registerDate", registerDate);
 		json.add("userHead", userHead==null?"res/default.jpg":userHead.getShortPath());
 		
-		//¶îÍâ×ÊÁÏ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		json.add("sex", userSex);
 		json.add("age", userAge);
 		json.add("qq", userQq);

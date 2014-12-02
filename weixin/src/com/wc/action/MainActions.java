@@ -50,6 +50,11 @@ public class MainActions {
 	private static Blowfish _of = new Blowfish("4H709fjyRIPOVvK");
 	/* 用户模块 */
 
+	public static void main(String[] args) {
+		MainActions aa=new MainActions();
+		WcUser user = new WcUser();
+		System.out.println(user.getFriends().add(aa.uDao.findById("6")));
+	}
 	/* 登陆接口 */
 	@POST
 	@Path("login.do")
@@ -136,7 +141,7 @@ public class MainActions {
 		user.setApiKey(_blow.encryptString(mobile + uPass
 				+ System.currentTimeMillis()));
 		// 加墨半成霜为好友
-		user.getFriends().add(uDao.findById("f39d1619443200d40144326bb70b002c"));
+		user.getFriends().add(uDao.findById("6"));
 		uDao.save(user);
 		
 		registerOpenFireUser(user);
