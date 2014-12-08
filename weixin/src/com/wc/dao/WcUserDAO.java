@@ -290,6 +290,11 @@ public class WcUserDAO  {
 		
 		List<WcUser> list=findByProperty(API_KEY, apiKey
 				, rowStartIdxAndCount);
+		System.out.println("findByApiKey-count---:"+list.size());
+		System.out.println(list.get(0).getUserName());
+		System.out.println(list.get(0).getApiKey());
+		System.out.println(list.get(0).getUserNickname());
+		System.out.println(list.get(0).getApiKey());
 		return list.size()==0?null:list.get(0);
 	}
 	
@@ -351,7 +356,7 @@ public class WcUserDAO  {
 
 	public List<WcUser> searchByUserNickname(String nickName, final int...rowStartIdxAndCount) {
 		// TODO Auto-generated method stub
-		EntityManagerHelper.log("¸ù¾ÝêÇ³ÆÄ£ºýËÑË÷", Level.INFO, null);
+		EntityManagerHelper.log("ï¿½ï¿½ï¿½ï¿½ï¿½Ç³ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Level.INFO, null);
 		try {
 			nickName="%"+nickName+"%";
 		final String queryString = "select model from WcUser model where model.userNickname like ?1 order by model.userId desc";

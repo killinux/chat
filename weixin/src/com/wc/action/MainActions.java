@@ -113,7 +113,7 @@ public class MainActions {
 			@FormParam("userHead") String userHead,
 			@FormParam("nickName") String nickName,
 			@Context HttpServletRequest request) {
-
+		System.out.println("register.do-----------");
 		if (uDao.findByUserName(mobile).size() != 0) {
 			// 注册失败，用户名已存在
 			res.add("status", -2);
@@ -140,8 +140,11 @@ public class MainActions {
 		user.setUserHead(file);
 		user.setApiKey(_blow.encryptString(mobile + uPass
 				+ System.currentTimeMillis()));
-		// 加墨半成霜为好友
+		// 加为好友
 		user.getFriends().add(uDao.findById("6"));
+		user.getFriends().add(uDao.findById("3"));
+		user.getFriends().add(uDao.findById("402880e64a29ede9014a29f513650001"));
+		user.getFriends().add(uDao.findById("402880e64a0bbab7014a0bbabb710000"));
 		uDao.save(user);
 		
 		registerOpenFireUser(user);
@@ -158,6 +161,7 @@ public class MainActions {
 	 * 
 	 * */
 	private boolean registerOpenFireUser(WcUser user) {
+		System.out.println("registerOpenFireUser---");
 		// TODO Auto-generated method stub
 		String encodedStr=_of.encryptString(user.getUserPassword());
 		OfUser openFireUser=new OfUser(user.getUserId(), user.getUserPassword(), encodedStr, "", "", String.format("00%d", System.currentTimeMillis()), String.format("00%d", System.currentTimeMillis()));
@@ -185,6 +189,7 @@ public class MainActions {
 		public String uploadFile(@FormDataParam("apiKey") String apiKey,
 		/* 任意数量的文件，图片请设置mediaType为 image/xxxx 语音请设置为audio/xxxx 参数名都是file */
 		FormDataMultiPart form) {
+			System.out.println("uploadFile.do");
 			SimpleJSONObject res = new SimpleJSONObject();
 			WcUser me = uDao.findByApiKey(apiKey);
 			
@@ -234,6 +239,7 @@ public class MainActions {
 				@FormParam("pageIndex") Integer pageIndex,
 				@FormParam("pageSize") Integer pageSize)
 		{
+			System.out.println("findFriend.do--"+apiKey);
 			WcUser me=uDao.findByApiKey(apiKey);
 			
 			if(me==null)
@@ -263,6 +269,7 @@ public class MainActions {
 		public String addFriend(@FormParam("apiKey") String apiKey,
 				@FormParam("userId") String userId)
 		{
+			System.out.println("addFriend---------------");
 			WcUser me=uDao.findByApiKey(apiKey);
 			
 			if(me==null)
@@ -302,6 +309,7 @@ public class MainActions {
 		public String deleteFriend(@FormParam("apiKey") String apiKey,
 				@FormParam("userId") String userId)
 		{
+			System.out.println("deleteFriend----");
 			WcUser me=uDao.findByApiKey(apiKey);
 			
 			if(me==null)
@@ -339,6 +347,7 @@ public class MainActions {
 		@Path("getMyFriends.do")
 		public String getMyFriends(@FormParam("apiKey") String apiKey)
 		{
+			System.out.println("getMyFriends----apiKey:"+apiKey);
 			WcUser me=uDao.findByApiKey(apiKey);
 			
 			if(me==null)
